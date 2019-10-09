@@ -1,11 +1,11 @@
 <template>
   <div id="footer">
     <div class="footer-item" :class="{on: '/msite'===$route.path}" @click="goto('/msite')">
-      <span class="iconfont icon-icon-test"></span>
+      <span class="iconfont icon-shouye"></span>
       <span class="footer-text">首页</span>
     </div>
     <div class="footer-item" :class="{on: '/category'===$route.path}" @click="goto('/category')">
-      <span class="iconfont icon-cate"></span>
+      <span class="iconfont icon-fenlei"></span>
       <span class="footer-text">分类</span>
     </div>
     <div class="footer-item" :class="{on: $route.path==='/identify'}" @click="goto('/identify')">
@@ -17,7 +17,7 @@
       <span class="footer-text">购物车</span>
     </div>
     <div class="footer-item" :class="{on: $route.path==='/personal'}" @click="goto('/personal')">
-      <span class="iconfont icon-renwu"></span>
+      <span class="iconfont icon-geren"></span>
       <span class="footer-text">个人</span>
     </div>
   </div>
@@ -45,7 +45,7 @@
     left: 0
     bottom: 0
     box-sizing: border-box
-    z-index: 99
+    z-index: 9
     width: 100%
     height 49px
     display flex  
@@ -60,6 +60,7 @@
       font-size: 14px
       span:nth-child(1)
         padding-bottom: 5px
+        font-size 18px
       &.on
         color: #b4282d
  
