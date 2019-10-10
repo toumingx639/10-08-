@@ -45,17 +45,16 @@
             </div>
           </a>
         </div>
-
-        <div class="good-thing"></div>
+        
+        <Entrance />
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  // import Swiper from 'swiper'
-  // import 'swiper/css/swiper.min.css'
   import BScroll from '@better-scroll/core'
+  import Entrance from '../../components/Find/entrance.vue'
 
   export default {
     data() {
@@ -63,6 +62,10 @@
         arr: ['推荐','好货内部价','晒单','选购指南','回购榜','达人','HOME'],
         isShow: true  // 默认为true时是在发现页面的
       }
+    },
+
+    components: {
+      Entrance
     },
 
     mounted() {
@@ -113,12 +116,14 @@
   @import "../../common/stylus/mixins.styl"
   #identify
     box-sizing border-box
-    padding-bottom 50px
     width 100%
     height 100%
     background-color #fafafa
     .header
       width 100%
+      position relative
+      z-index 999
+      background-color #fafafa
       .top
         display flex
         justify-content space-between
@@ -189,10 +194,9 @@
     .main
       box-sizing border-box
       width 100%
-      height 100%
-      clearFix()
+      height 600px
       .content
-        float left
+        padding-bottom 80px
         .banner
           margin 10px 0
           height 188px

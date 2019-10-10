@@ -5,6 +5,8 @@ import ShoppingCart from '../pages/ShoppingCart/ShoppingCart.vue'
 import Personal from '../pages/Personal/Personal.vue'
 import Login from '../pages/Login/Login.vue'
 import Search from '../pages/Search/Search.vue'
+import Email from '../pages/Login/Email.vue'
+import Phone from '../pages/Login/Phone.vue'
 
 
 export default [
@@ -46,6 +48,14 @@ export default [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/login/email',
+    component: Email
+  },
+  {
+    path: '/login/phone',
+    component: Phone
   },
   {
     path: '/search',

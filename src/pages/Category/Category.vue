@@ -1,11 +1,6 @@
 <template>
-  <div id="category">
-    <div class="header">
-      <div class="header-search" @click="goto('/search')">
-        <span class="iconfont icon-icon"></span>
-        <span class="placeholder">搜索商品, 共23084款好物</span>
-      </div>
-    </div>
+   <div id="category">
+    <MsiteHeader />
 
     <div class="main">
       <div class="left-scroll" ref="leftScroll">
@@ -126,6 +121,7 @@
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   import BScroll from '@better-scroll/core'
+  import MsiteHeader from '../../components/Header/MsiteHeader.vue'
 
   export default {
     data() {
@@ -133,6 +129,10 @@
         arr: ['推荐专区', '秋冬好物', '爆品专区', '新品专区', '居家生活', '服饰鞋包', '美食酒水', '个护清洁', '母婴亲子', '运动旅行', '数码家电', '全球特色', '运动旅行', '数码家电', '全球特色'],
         listArr: 0 // 当前列表的下标
       }
+    },
+    
+    components: {
+      MsiteHeader
     },
 
     mounted() {

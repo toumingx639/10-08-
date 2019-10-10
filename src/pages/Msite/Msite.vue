@@ -495,6 +495,7 @@
               width 100%
               background: rgba(0,0,0,.5)
     .container
+      box-sizing border-box
       width 100%
       height 100%
       .main

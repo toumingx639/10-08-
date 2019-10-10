@@ -105,10 +105,9 @@
           width 100%
           height 160px
           color #333333
+          opacity 0.9
           a
             display inline-block
-            // height 40px
-            // line-height 40px
             padding 4px 8px
             border 1px solid #999999
             margin 0 16px 16px 0
