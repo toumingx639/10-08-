@@ -29,7 +29,7 @@
       <div class="img"></div>
       <div class="text">
         <div class="title">去添加点什么吧</div>
-        <div class="btn">登录</div>
+        <div class="btn" @click="goto('/login')">登录</div>
       </div>
     </div>
   </div>
@@ -37,6 +37,15 @@
 
 <script type="text/ecmascript-6">
   export default {
+    methods: {
+      goto (path) {
+        if (this.$route.path !== path) {
+          this.$router.push(path)
+        } else {
+          window.location.reload()  // 是请求的路径的话 更新下页面
+        }
+      },
+    },
   }
 </script>
 

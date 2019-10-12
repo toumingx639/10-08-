@@ -29,7 +29,7 @@
           </div>
 
           <div class="foot">
-            <span>其他登录方式 ></span>
+            <span @click="$router.replace('/login')">其他登录方式 ></span>
           </div>
         </div>
       </div>

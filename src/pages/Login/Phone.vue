@@ -12,18 +12,25 @@
           <div class="account">
             <div class="inputBox">
               <label for="txt1">请输入手机号</label>
-              <input type="text" id="txt1" placeholder="请输入手机号">
+              <input type="text" id="txt1" placeholder="请输入手机号" v-model="phoneNum">
               <div class="line"></div>
             </div>
             <div class="inputBox gain">
               <div class="pwd">
                 <label for="txt2">请输入短信验证码</label>
-                <input type="text" id="txt2" placeholder="请输入短信验证码">
+                <input type="text" id="txt2" placeholder="请输入短信验证码" v-model="pwd">
               </div>
               <div class="code">
                 <a href="javascript:">获取验证码</a>
               </div>
             </div>
+
+            <!-- 表单验证 出错的时候会出现-->
+            <div class="formCode" v-if="phoneCode !== 0"> 
+              <span v-if="phoneCode === 1">手机号输入不正确</span>
+              <span v-else-if="phoneCode === 2">验证码输入不正确</span>
+            </div>
+
             <div class="register">
               <a href="javascript:">遇到问题？</a>
               <a href="javascript:">使用密码验证登录</a>
@@ -31,7 +38,8 @@
           </div>
 
           <div class="btn-item">
-            <div class="name">登录</div>
+            <!-- 点击提交 -->
+            <div class="name" @click.prevent="submit">登录</div>
             <div class="agree">
               <span class="agree-btn">
                 <input type="checkbox">
@@ -46,7 +54,7 @@
           </div>
 
           <div class="foot">
-            <span>其他登录方式 ></span>
+            <span @click="$router.replace('/login')">其他登录方式 ></span>
           </div>
         </div>
       </div>
@@ -58,11 +66,32 @@
   import MainHeader from '../../components/Header/mainHeader.vue'
 
   export default {
+    data() {
+      return {
+        phoneNum: "",  // 输入的手机号
+        pwd: "",   // 获取的验证码
+        phoneCode: 0   // 0代表没有错误  1 代表手机号出错  2 代表验证码出错
+      }
+    },
+
     components: {
       MainHeader
     },
 
     methods: {
+      submit () {
+        const regPhone = /^1[3456789]\d{9}$/   // []表示其中的任意一个  \d表示任意一个数字
+        const regPwd = /^\d{6}/   // 六位数字验证码
+        const resultPhone = regPhone.test(this.phoneNum)
+        const resultPwd = regPwd.test(this.pwd)
+        if (!resultPhone) {
+          this.phoneCode = 1
+        } else if (!resultPwd) {
+          this.phoneCode = 2
+        }
+        console.log(this.phoneCode)
+      },
+
       goto (path) {
         if (this.$route.path !== path) {
           this.$router.push(path)
@@ -129,6 +158,9 @@
               border 1px solid #7F7F7F
               border-radius 5px
               margin 8px 5px 0 0
+          .formCode
+            font-size 12px
+            color red
           .register
             height 60px
             line-height 60px

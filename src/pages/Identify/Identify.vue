@@ -10,10 +10,18 @@
 
         <div class="center">
           <a href="javascript:">
-            <span :class="{on: isShow}">发现</span>
+            <span :class="{on: $route.path === '/identify'}"
+              @click="$router.replace('/identify')"
+            >
+              发现
+            </span>
           </a>
           <a href="javascript:">
-            <span :class="{on: !isShow}">甄选家</span>
+            <span :class="{on: $route.path === '/identify/select'}"
+              @click="$router.replace('/identify/select')"
+            >
+              甄选家
+            </span>
           </a>
         </div>
 
@@ -27,16 +35,19 @@
         </div>
       </div>
 
-      <div class="list" v-show="isShow" ref="info">
+      <div class="list" v-show="$route.path === '/identify'" ref="info">
         <ul class="wrapper">
-          <li class="content" v-for="(item, index) in arr" :key="index" :class="{active: index===0}">
-            <a href="javascript:">{{item}}</a>
+          <li class="content" v-for="(item, index) in nav" :key="index" 
+            :class="{active: index === currentIndex}"
+            @click="currentIndex = index"
+          >
+            <a href="javascript:">{{item.tabName}}</a>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="main" ref="details">
+    <div class="main" ref="details" v-if="$route.path === '/identify'">
       <div class="content">
         <div class="banner">
           <a href="javascript:">
@@ -49,18 +60,23 @@
         <Entrance />
       </div>
     </div>
+
+    <div v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapState} from 'vuex'
   import BScroll from '@better-scroll/core'
   import Entrance from '../../components/Find/entrance.vue'
 
   export default {
     data() {
       return {
-        arr: ['推荐','好货内部价','晒单','选购指南','回购榜','达人','HOME'],
-        isShow: true  // 默认为true时是在发现页面的
+        isShow: true,  // 默认为true时是在发现页面的
+        currentIndex: 0
       }
     },
 
@@ -68,7 +84,17 @@
       Entrance
     },
 
-    mounted() {
+    computed: {
+      ...mapState({
+        nav: state => state.nav,
+        content: state => state.content
+      })
+    },
+
+    async mounted() {
+      await this.$store.dispatch('getRemmendNav')
+      await this.$store.dispatch('getRemmendContent')
+      
       this.initScroll()
       this.initScroll2()
     },

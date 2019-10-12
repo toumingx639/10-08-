@@ -11,9 +11,13 @@
       </div>
       <div class="list-nav">
         <div class="list" ref="info">
-          <ul class="wrapper">
-            <li class="content" v-for="(item, index) in arr" :key="index" :class="{active: index===0}">
-              <a href="javascript:">{{item}}</a>
+          <ul class="wrapper" v-if="homeData.kingKongModule.kingKongList">
+            <li class="content" 
+              v-for="(item, index) in homeData.kingKongModule.kingKongList" :key="index" 
+              :class="{active: index === currentIndex}"
+              @click="currentIndex = index"
+            >
+              <a href="javascript:">{{item.text}}</a>
             </li>
           </ul>
         </div>
@@ -26,8 +30,8 @@
                 <div class="mask-icon" @click="display()"></div>
               </div>
               <ul>
-                <li v-for="(item, index) in arr" :key="index" :class="{active: index===0}">
-                  <a href="javascript:">{{item}}</a>
+                <li v-for="(item, index) in homeData.kingKongModule.kingKongList" :key="index" :class="{active: index===0}">
+                  <a href="javascript:">{{item.text}}</a>
                 </li>
               </ul>
             </div>
@@ -70,65 +74,11 @@
         </div>
       
         <div class="classification">
-          <a href="https://m.you.163.com/item/newItem">
+          <a href="https://m.you.163.com/item/newItem" v-for="(item, index) in homeData.kingKongModule.kingKongList" :key="index">
             <div class="icon">
-              <img src="http://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
+              <img :src="item.picUrl">
             </div>
-            <div class="text">新品首发</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-            </div>
-            <div class="text">居家生活</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/896a3beac514ae8f40aafe028e5fec56.png" alt="">
-            </div>
-            <div class="text">服饰鞋包</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="http://yanxuan.nosdn.127.net/37520d1204a0c55474021b43dac2a69e.png" alt="">
-            </div>
-            <div class="text">美食酒水</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/6c3bd9d885c818b1f73e497335a68b47.png" alt="">
-            </div>
-            <div class="text">个护清洁</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/559d2a240ec20b096590a902217009ff.png" alt="">
-            </div>
-            <div class="text">母婴亲子</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/5c088559ebcc3f0ffcda663f04dfbeb2.png" alt="">
-            </div>
-            <div class="text">运动旅行</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/fbca8e1f2948f0c09fc7672c2c125384.png" alt="">
-            </div>
-            <div class="text">数码家电</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="https://yanxuan.nosdn.127.net/f7281169d4e82d5d8d52aa1fec83fe01.png" alt="">
-            </div>
-            <div class="text">全球特色</div>
-          </a>
-          <a href="https://m.you.163.com/item/newItem">
-            <div class="icon">
-              <img src="http://yanxuan.nosdn.127.net/12e8efd15b9b210ab156a7ee9b340548.gif" alt="">
-            </div>
-            <div class="text">好货抄底</div>
+            <div class="text">{{item.text}}</div>
           </a>
         </div>
 
@@ -234,46 +184,30 @@
             <div class="more">更多></div>
           </div>
           <ul>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
+            <li v-for="(item, index) in homeData.flashSaleModule.itemList" :key="index">
+              <img :src="item.picUrl" >
               <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
+                <span class="newPri">¥{{item.activityPrice}}</span>
+                <span class="oldPri">¥{{item.originPrice}}</span>
               </div>
             </li>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
+          </ul>
+        </div>
+
+        <!-- 新品首发 -->
+        <div class="limitedTime">
+          <div class="productHeader">
+            <div class="time">
+              <h2>新品首发</h2>
+            </div>
+            <div class="more">更多></div>
+          </div>
+          <ul>
+            <li v-for="(item, index) in homeData.flashSaleModule.itemList" :key="index">
+              <img :src="item.picUrl" >
               <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
-              </div>
-            </li>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
-              <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
-              </div>
-            </li>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
-              <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
-              </div>
-            </li>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
-              <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
-              </div>
-            </li>
-            <li>
-              <img src="http://yanxuan.nosdn.127.net/ff90462e4d7c7edd01a25f8932e1800f.png" >
-              <div>
-                <span class="newPri">¥289</span>
-                <span class="oldPri">¥349</span>
+                <span class="newPri">¥{{item.activityPrice}}</span>
+                <span class="oldPri">¥{{item.originPrice}}</span>
               </div>
             </li>
           </ul>
@@ -296,6 +230,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapState} from 'vuex'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   import BScroll from '@better-scroll/core'
@@ -304,11 +239,20 @@
     data() {
       return {
         arr: ['推荐','居家生活','服饰鞋包','美食酒水','个户清洁','母婴亲子','运动旅行','数码家电','全球特色'],
-        isOPen: false
+        isOPen: false,
+        currentIndex: 0
       }
     },
 
-    mounted() {
+    computed: {
+      ...mapState({
+        homeData: state => state.homeData
+      })
+    },
+
+    async mounted() {
+      await this.$store.dispatch("getHomeData")
+
       new Swiper('.swiper-container', {
         loop: true, // 循环模式选项
         // 如果需要分页器
@@ -364,6 +308,7 @@
         })
       }
     },
+    
     
   }
 </script>

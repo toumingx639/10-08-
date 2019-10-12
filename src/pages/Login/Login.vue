@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div id="login" v-if="$route.path==='/login'">
     <MainHeader />
 
     <div class="main">
@@ -9,11 +9,11 @@
         </div>
 
         <div class="btn">
-          <div class="btn-item phone">
+          <div class="btn-item phone" @click="$router.replace('/login/phone')">
             <i class="iconfont icon-shouji"></i>
             <span class="name">手机号快捷登录</span>
           </div>
-          <div class="btn-item email">
+          <div class="btn-item email" @click="$router.replace('/login/email')">
             <i class="iconfont icon-youxiang1"></i>
             <span class="name">邮箱账号登录</span>
           </div>
@@ -35,6 +35,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div v-else>
+    <router-view></router-view>
   </div>
 </template>
 

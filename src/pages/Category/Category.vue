@@ -3,11 +3,13 @@
     <MsiteHeader />
 
     <div class="main">
-      <div class="left-scroll" ref="leftScroll">
+      <div class="left-scroll" ref="leftScroll" v-if="category.categoryL1List">
         <div class="left">
           <ul>
-            <li v-for="(item, index) in arr" :key="index" :class="{active: index === 0}" @click="goto(index)">
-              <a href="javascript:">{{item}}</a>
+            <li v-for="(item, index) in category.categoryL1List" :key="index" 
+              :class="{active: index === currentIndex}"
+              @click="currentIndex = index">
+              <a href="javascript:">{{item.name}}</a>
             </li>
           </ul>
         </div>
@@ -17,97 +19,20 @@
         <div class="right">
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="https://yanxuan.nosdn.127.net/01467535cd09249bd5cf0ae110845892.jpg?imageView&quality=75&thumbnail=0x196"></div>
-              <div class="swiper-slide"><img src="https://yanxuan.nosdn.127.net/21eaf80574f1ce30fee388e777ccb15d.jpg?imageView&quality=75&thumbnail=0x196"></div>
+              <div class="swiper-slide">
+                <img :src="category.categoryL1List[currentIndex].wapBannerUrl">
+              </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" v-if="false"></div>
           </div>
 
           <div class="content">
             <ul>
-              <li>
+              <li v-for="(item, index) in category.categoryL1List[currentIndex].subCateList" :key="index">
                 <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
+                  <img :src="item.bannerUrl" alt="">
                 </div>
-                <div class="text">明星商品</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">员工精选好货低至15</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/cda4a56526a230055bea8221a6b7ab11.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">99+好评</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">解乏小食每满99减12</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">秋冬服饰配特惠低至5折</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">断货补单王39元起</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">新奇好物低至9.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">金秋出游用品低至12.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">新奇好物低至9.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">金秋出游用品低至12.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">新奇好物低至9.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">金秋出游用品低至12.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">新奇好物低至9.9</div>
-              </li>
-              <li>
-                <div class="img">
-                  <img src="https://yanxuan.nosdn.127.net/39c21b07c6ccdefeac5bd8dd985ceb4e.png?imageView&quality=85&thumbnail=144x144" alt="">
-                </div>
-                <div class="text">金秋出游用品低至12.9</div>
+                <div class="text">{{item.name}}</div>
               </li>
             </ul>  
           </div>
@@ -118,6 +43,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapState} from 'vuex'
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
   import BScroll from '@better-scroll/core'
@@ -127,15 +53,23 @@
     data() {
       return {
         arr: ['推荐专区', '秋冬好物', '爆品专区', '新品专区', '居家生活', '服饰鞋包', '美食酒水', '个护清洁', '母婴亲子', '运动旅行', '数码家电', '全球特色', '运动旅行', '数码家电', '全球特色'],
-        listArr: 0 // 当前列表的下标
+        currentIndex: 0
       }
+    },
+
+    computed: {
+      ...mapState({
+        category: state => state.category
+      })
     },
     
     components: {
       MsiteHeader
     },
 
-    mounted() {
+    async mounted() {
+      await this.$store.dispatch("getCategory")
+
       new Swiper('.swiper-container', {
         loop: true, // 循环模式选项
         // 如果需要分页器
